@@ -29,4 +29,24 @@ public class Solution {
         }
         return res;
     }
+
+    public static int solution2(String s){
+        int b=0,a=0,l=0,o=0,n=0;
+        for(int i = 0; i< s.length(); i++){
+            char c = s.charAt(i);
+           if(c == 'B'){
+               b++;
+           } else if (c == 'A') {
+               a++;
+           } else if (c =='L') {
+               l++;
+           } else if (c == 'O') {
+               o++;
+           } else if (c == 'N') {
+               n++;
+           }
+        }
+        return Math.min(Math.min(b, a), Math.min(Math.min(l/2, o/2), n));
+    }
+
 }
