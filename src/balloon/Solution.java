@@ -1,5 +1,11 @@
 package balloon;
 
+import java.io.*;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 public class Solution {
 
     public static int solution(String s){
@@ -48,5 +54,34 @@ public class Solution {
         }
         return Math.min(Math.min(b, a), Math.min(Math.min(l/2, o/2), n));
     }
+
+
+    public static void readAndWriteFromFile(String in, String out){
+
+        try {
+            URL path = Solution.class.getResource(in);
+            File file = new File(path.getFile());
+            File file1 = new File(out);
+            PrintWriter writer = new PrintWriter(new FileWriter(file1,true));
+            Scanner sc = new Scanner(file);
+            while(sc.hasNextLine()) {
+                writer.println(solution(sc.nextLine()));
+            }
+            writer.close();
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("nema fajla");
+        } catch (IOException e) {
+            System.out.println("greska prilikom upisa");
+        }catch (NullPointerException e){
+            System.out.println("bad path");
+        }
+    }
+
+
+
+
+
+
 
 }
