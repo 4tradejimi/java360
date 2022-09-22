@@ -11,10 +11,9 @@ public class Solution {
     public static int solution(String s){
         int res = 0;
         String k = s.toUpperCase();
-        StringBuilder text =  new StringBuilder();
-        text.append(k);
-        StringBuilder balon =  new StringBuilder();
-        balon.append("BALLOON");
+        StringBuilder text =  new StringBuilder().append(k);
+        StringBuilder balon =  new StringBuilder().append("BALLOON");
+        //balon.append("BALLOON");
         int chek1 = text.length()/balon.length();
         boolean chek2 = true;
         while(chek1>0 && chek2) {
@@ -56,19 +55,23 @@ public class Solution {
     }
 
 
-    public static void readAndWriteFromFile(String in, String out){
-
+    public static void readAndWriteFromFile(String absPathToInput, String absPathtoOutput){
+//        URL path = Solution.class.getResource(absPathToInput);
+//        System.out.println(path);
         try {
-            URL path = Solution.class.getResource(in);
-            File file = new File(path.getFile());
-            File file1 = new File(out);
-            PrintWriter writer = new PrintWriter(new FileWriter(file1,true));
-            Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()) {
-                writer.println(solution(sc.nextLine()));
+            File in = new File(absPathToInput);
+            File out = new File(absPathtoOutput);
+            if(out.exists() && !out.isDirectory()){
+                PrintWriter writer = new PrintWriter(new FileWriter(out,false));
+                Scanner sc = new Scanner(in);
+                while(sc.hasNextLine())
+                    writer.println(solution(sc.nextLine()));
+                writer.close();
+                sc.close();
+            }else{
+                throw new FileNotFoundException();
             }
-            writer.close();
-            sc.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("nema fajla");
         } catch (IOException e) {
@@ -77,11 +80,5 @@ public class Solution {
             System.out.println("bad path");
         }
     }
-
-
-
-
-
-
 
 }
